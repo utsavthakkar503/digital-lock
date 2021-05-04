@@ -48,7 +48,7 @@ const App: React.FC = () => {
            <SpinButton
                 value={value.firstCounter}
                 min={0}
-                max={10}
+                max={9}
                 step={1}
                 incrementButtonAriaLabel="Increase value by 1"
                 decrementButtonAriaLabel="Decrease value by 1"
@@ -62,7 +62,7 @@ const App: React.FC = () => {
                <SpinButton
                 value={value?.secondCounter}
                 min={0}
-                max={10}
+                max={9}
                 step={1}
                 incrementButtonAriaLabel="Increase value by 1"
                 decrementButtonAriaLabel="Decrease value by 1"
@@ -76,7 +76,7 @@ const App: React.FC = () => {
                <SpinButton
                 value={value?.thirdCounter}
                 min={0}
-                max={10}
+                max={9}
                 step={1}
                 incrementButtonAriaLabel="Increase value by 1"
                 decrementButtonAriaLabel="Decrease value by 1"
