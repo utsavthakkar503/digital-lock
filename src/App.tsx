@@ -6,7 +6,7 @@ import { Toggle } from '@fluentui/react/lib/Toggle';
 import { Stack, IStackTokens } from "@fluentui/react";
 import { DefaultButton, PrimaryButton } from '@fluentui/react/lib/Button';
 import "./App.css";
-
+import Lock from "./Lock"
 
 const lightTheme: PartialTheme = createTheme({
   palette: {
@@ -150,11 +150,10 @@ const unlock = () => {
   return (
     <ThemeProvider applyTo={"body"} theme={isDarkTheme? darkTheme: lightTheme}>
     <div className="App">
-      
       <div className="App-body">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
+        <Lock />
         <Toggle className="toggle-btn" label="Dark mode" inlineLabel onText="On" offText="Off" onChange={onChange} />
       </header>
         <Stack tokens={containerStackTokens}>
