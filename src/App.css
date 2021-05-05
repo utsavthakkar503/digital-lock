@@ -11,6 +11,7 @@
   height: 20vmin;
   pointer-events: none;
   position: absolute;
+  top: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -20,13 +21,11 @@
 }
 
 .App-body {
-  background-color: #201f1e;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
@@ -44,4 +43,11 @@
 
 .display-counter h1 {
   font-size: 85px;
+}
+
+.toggle-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 50px;
 }
