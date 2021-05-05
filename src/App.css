@@ -2,9 +2,15 @@
   text-align: center;
 }
 
+.App-header {
+  display: flex;
+  justify-content: center;
+}
+
 .App-logo {
-  height: 40vmin;
+  height: 20vmin;
   pointer-events: none;
+  position: absolute;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -13,12 +19,11 @@
   }
 }
 
-.App-header {
+.App-body {
   background-color: #201f1e;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
@@ -35,4 +40,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.display-counter h1 {
+  font-size: 85px;
 }
