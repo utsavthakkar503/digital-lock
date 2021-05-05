@@ -4,6 +4,7 @@ import { SpinButton, ISpinButtonStyles } from "@fluentui/react/lib/SpinButton";
 import { ThemeProvider, createTheme, PartialTheme } from '@fluentui/react/lib/Theme';
 import { Toggle } from '@fluentui/react/lib/Toggle';
 import { Stack, IStackTokens } from "@fluentui/react";
+import { DefaultButton, PrimaryButton } from '@fluentui/react/lib/Button';
 import "./App.css";
 
 
@@ -68,6 +69,10 @@ const wrapStackTokens: IStackTokens = { childrenGap: 10 };
 const counterStackTokens: IStackTokens = {
   childrenGap: 25,
 };
+const lockStackTokens: IStackTokens = {
+  childrenGap: 5,
+  padding: 20
+}
 
 const styles: Partial<ISpinButtonStyles> = { spinButtonWrapper: { width: 75 } };
 
@@ -77,10 +82,18 @@ interface ICounter {
   thirdCounter?: string | undefined;
 }
 
+interface ICombination {
+  combinationIsSet: boolean,
+  cmb: string | undefined | null
+}
 
 const App: React.FC = () => {
 
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false)
+  const [combination, setCombinationIsSet] = useState<ICombination>({
+    combinationIsSet: false,
+    cmb: null
+  })
 
   const [value, setValue] = useState<ICounter>({
     firstCounter: "0",
@@ -97,6 +110,42 @@ function onChange(ev: React.MouseEvent<HTMLElement>, checked?: boolean) {
     }
 }
 
+const setCombination = () => {
+  if (value.firstCounter && value.secondCounter && value.thirdCounter!== undefined) {
+    if (combination.combinationIsSet) {
+      throw new Error("Combination already set")
+    } else {
+      const currentCombination: string = (value.firstCounter + value.secondCounter + value.thirdCounter)
+      if (currentCombination === "000") {
+        alert("can't set 000 as combination")
+      } else {  
+        setCombinationIsSet({
+          combinationIsSet: !combination.combinationIsSet,
+          cmb: currentCombination
+        })
+        setValue({
+          firstCounter: "0",
+          secondCounter: "0",
+          thirdCounter: "0",
+        })
+      }   
+    }    
+  }
+}
+
+
+const unlock = () => {
+  if (combination.cmb !== null && combination.cmb !== undefined) {
+      if (value.firstCounter && value.secondCounter && value.thirdCounter!== undefined) {
+        const currentCombination: string = (value.firstCounter + value.secondCounter + value.thirdCounter)
+          if (currentCombination ===  combination.cmb) {
+                alert("Unlocked")
+          } else {
+                alert("Wrong Combination! Try again.")
+          }
+      }
+  }
+}
 
   return (
     <ThemeProvider applyTo={"body"} theme={isDarkTheme? darkTheme: lightTheme}>
@@ -184,6 +233,22 @@ function onChange(ev: React.MouseEvent<HTMLElement>, checked?: boolean) {
               />
             </Stack.Item>
           </Stack>
+          <Stack
+            horizontal
+            horizontalAlign="center"
+            disableShrink
+            className="display-counter"
+            tokens={lockStackTokens}
+          >
+                 <PrimaryButton
+                  text="Set"
+                  allowDisabledFocus
+                  disabled={combination.combinationIsSet}
+                  onClick={setCombination}
+                />
+                <DefaultButton text="Unlock" allowDisabledFocus onClick={unlock}/>
+          </Stack>
+
         </Stack>
       </div>
     </div>
