@@ -56,3 +56,12 @@
   position: absolute;
   top: 0;
 }
+
+.name-signature p {
+  font-family: 'Pinyon Script', cursive;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 50px;
+  font-size: 0.8em;
+}
