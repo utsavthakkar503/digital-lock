@@ -51,3 +51,8 @@
   right: 0;
   margin: 50px;
 }
+
+.svg-wrapper {
+  position: absolute;
+  top: 0;
+}
