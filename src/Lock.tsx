@@ -23,7 +23,7 @@ const Lock: React.FC<IAnimation> = ({ play, unlocked, unlk }) => {
           <motion.g
             initial={(play > 0 && unlocked === false)? true : false}
             animate={{
-              translateX: [null, -20, 0, 0],
+              translateX: [null, -20, 20, 0],
               fill: "#ff008c"
             }}
             transition={{
@@ -64,7 +64,7 @@ const Lock: React.FC<IAnimation> = ({ play, unlocked, unlk }) => {
               y="52.4138"
               width="82.7586"
               height="67.5862"
-              rx="3"
+              rx="10"
               fill="#D1D5D5"
             />
           </motion.g>
