@@ -223,9 +223,32 @@ const App: React.FC = () => {
               className="display-counter"
               tokens={counterStackTokens}
             >
-              <h1>:)</h1>
+              <motion.div
+                className="unlock-message-wrapper"
+                initial={{
+                  opacity: 0,
+                  y: 40
+                }} animate={{
+                  opacity: 1,
+                  y: 0
+                }} transition={{
+                  duration: 0.3,
+                  delay: 0.2
+                }}>
+                <h1>:)</h1>
+              </motion.div>
             </Stack>
           ) : (
+            <motion.div className="mid-content-wrapper" initial={{
+              opacity: 0,
+              y: 40
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.3,
+              delay: 0.2
+            }}>
             <Stack tokens={containerStackTokens}>
               <Stack
                 horizontal
@@ -322,6 +345,7 @@ const App: React.FC = () => {
                 />
               </Stack>
             </Stack>
+            </motion.div>
           )}
           <div className="name-signature">
             <p>Made with</p>
@@ -330,14 +354,12 @@ const App: React.FC = () => {
               drag
               dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
               dragElastic={0.3}
-              animate={
-                {
-                  scale: [1, 1.1 , 1]
-                }
-              }
+              animate={{
+                scale: [1, 1.1, 1],
+              }}
               transition={{
                 repeat: Infinity,
-                duration: 0.8
+                duration: 0.8,
               }}
             >
               <motion.div className="dragable-div"></motion.div>
