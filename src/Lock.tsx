@@ -23,8 +23,7 @@ const Lock: React.FC<IAnimation> = ({ play, unlocked, unlk }) => {
           <motion.g
             initial={(play > 0 && unlocked === false)? true : false}
             animate={{
-              translateX: [null, -20, 0, 0],
-              fill: "#ff008c"
+              translateX: [null, -20, 20, 0],
             }}
             transition={{
               type: "spring",
@@ -57,6 +56,8 @@ const Lock: React.FC<IAnimation> = ({ play, unlocked, unlk }) => {
               clipRule="evenodd"
               d="M42.0685 0C60.026 0 74.4828 14.57 74.4828 32.6682V68.9655H65.4789V32.6682C65.4789 19.5968 55.0374 9.07434 42.0685 9.07434C29.096 9.07434 18.6554 19.5968 18.6554 32.6682V57.6947H9.65517V32.6682C9.65517 14.57 24.1128 0 42.0685 0V0Z"
               fill="#D1D5D5"
+              stroke="#000000"
+              strokeWidth="0.5px"
             />
             </motion.g>
             <rect
@@ -64,8 +65,10 @@ const Lock: React.FC<IAnimation> = ({ play, unlocked, unlk }) => {
               y="52.4138"
               width="82.7586"
               height="67.5862"
-              rx="3"
+              rx="10"
               fill="#D1D5D5"
+              stroke="#000000"
+              strokeWidth="0.5px"
             />
           </motion.g>
         </g>
