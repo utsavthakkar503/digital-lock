@@ -10,6 +10,8 @@ import { Stack, IStackTokens } from "@fluentui/react";
 import { DefaultButton, PrimaryButton } from "@fluentui/react/lib/Button";
 import "./App.css";
 import Lock from "./Lock";
+import heart from "./heart.svg";
+import { motion } from "framer-motion";
 
 const lightTheme: PartialTheme = createTheme({
   palette: {
@@ -94,7 +96,7 @@ interface ICombination {
 
 interface IUnlocked {
   unlocked: boolean;
-  unlk: number
+  unlk: number;
 }
 
 const App: React.FC = () => {
@@ -113,7 +115,10 @@ const App: React.FC = () => {
     play: 0,
   });
 
-  const [unlockConfig, setUnlockConfig ] = useState<IUnlocked>({ unlocked: false, unlk: 0 })
+  const [unlockConfig, setUnlockConfig] = useState<IUnlocked>({
+    unlocked: false,
+    unlk: 0,
+  });
 
   function onChange(ev: React.MouseEvent<HTMLElement>, checked?: boolean) {
     if (checked) {
@@ -162,15 +167,14 @@ const App: React.FC = () => {
           value.firstCounter + value.secondCounter + value.thirdCounter;
         if (currentCombination === combination.cmb) {
           if (unlockConfig.unlocked) {
-              alert("App Already unlocked")
+            alert("App Already unlocked");
           } else {
-            let newUnlk = unlockConfig.unlk + 1
+            let newUnlk = unlockConfig.unlk + 1;
             setUnlockConfig({
               unlocked: true,
-              unlk: newUnlk
-            })
+              unlk: newUnlk,
+            });
           }
-        
         } else {
           let newPlay = playConfig.play + 1;
           setPlayConfig({ play: newPlay });
@@ -211,8 +215,8 @@ const App: React.FC = () => {
               onChange={onChange}
             />
           </header>
-          {unlockConfig.unlocked? (
-              <Stack
+          {unlockConfig.unlocked ? (
+            <Stack
               horizontal
               horizontalAlign="center"
               disableShrink
@@ -220,109 +224,127 @@ const App: React.FC = () => {
               tokens={counterStackTokens}
             >
               <h1>:)</h1>
-          
             </Stack>
-          ): (
+          ) : (
             <Stack tokens={containerStackTokens}>
-            <Stack
-              horizontal
-              horizontalAlign="center"
-              disableShrink
-              className="display-counter"
-              tokens={counterStackTokens}
-            >
-              <span>
-                {" "}
-                <h1>{value?.firstCounter}</h1>
-              </span>
-              <span>
-                <h1>{value?.secondCounter}</h1>
-              </span>
-              <span>
-                {" "}
-                <h1>{value?.thirdCounter}</h1>
-              </span>
-            </Stack>
+              <Stack
+                horizontal
+                horizontalAlign="center"
+                disableShrink
+                className="display-counter"
+                tokens={counterStackTokens}
+              >
+                <span>
+                  {" "}
+                  <h1>{value?.firstCounter}</h1>
+                </span>
+                <span>
+                  <h1>{value?.secondCounter}</h1>
+                </span>
+                <span>
+                  {" "}
+                  <h1>{value?.thirdCounter}</h1>
+                </span>
+              </Stack>
 
-            <Stack
-              horizontal
-              wrap
-              horizontalAlign="center"
-              tokens={wrapStackTokens}
-            >
-              <Stack.Item>
-                <SpinButton
-                  value={value.firstCounter}
-                  min={0}
-                  max={9}
-                  step={1}
-                  incrementButtonAriaLabel="Increase value by 1"
-                  decrementButtonAriaLabel="Decrease value by 1"
-                  onChange={(e, newValue) => {
-                    if (newValue !== undefined) {
-                      setValue({ ...value, firstCounter: newValue });
-                    }
-                  }}
-                  styles={styles}
+              <Stack
+                horizontal
+                wrap
+                horizontalAlign="center"
+                tokens={wrapStackTokens}
+              >
+                <Stack.Item>
+                  <SpinButton
+                    value={value.firstCounter}
+                    min={0}
+                    max={9}
+                    step={1}
+                    incrementButtonAriaLabel="Increase value by 1"
+                    decrementButtonAriaLabel="Decrease value by 1"
+                    onChange={(e, newValue) => {
+                      if (newValue !== undefined) {
+                        setValue({ ...value, firstCounter: newValue });
+                      }
+                    }}
+                    styles={styles}
+                  />
+                </Stack.Item>
+                <Stack.Item>
+                  <SpinButton
+                    value={value?.secondCounter}
+                    min={0}
+                    max={9}
+                    step={1}
+                    incrementButtonAriaLabel="Increase value by 1"
+                    decrementButtonAriaLabel="Decrease value by 1"
+                    onChange={(e, newValue) => {
+                      if (newValue !== undefined) {
+                        setValue({ ...value, secondCounter: newValue });
+                      }
+                    }}
+                    styles={styles}
+                  />
+                </Stack.Item>
+                <Stack.Item>
+                  <SpinButton
+                    value={value?.thirdCounter}
+                    min={0}
+                    max={9}
+                    step={1}
+                    incrementButtonAriaLabel="Increase value by 1"
+                    decrementButtonAriaLabel="Decrease value by 1"
+                    onChange={(e, newValue) => {
+                      if (newValue !== undefined) {
+                        setValue({ ...value, thirdCounter: newValue });
+                      }
+                    }}
+                    styles={styles}
+                  />
+                </Stack.Item>
+              </Stack>
+              <Stack
+                horizontal
+                horizontalAlign="center"
+                disableShrink
+                className="display-counter"
+                tokens={lockStackTokens}
+              >
+                <PrimaryButton
+                  text="Set"
+                  allowDisabledFocus
+                  disabled={combination.combinationIsSet}
+                  onClick={setCombination}
                 />
-              </Stack.Item>
-              <Stack.Item>
-                <SpinButton
-                  value={value?.secondCounter}
-                  min={0}
-                  max={9}
-                  step={1}
-                  incrementButtonAriaLabel="Increase value by 1"
-                  decrementButtonAriaLabel="Decrease value by 1"
-                  onChange={(e, newValue) => {
-                    if (newValue !== undefined) {
-                      setValue({ ...value, secondCounter: newValue });
-                    }
-                  }}
-                  styles={styles}
+                <DefaultButton
+                  text="Unlock"
+                  allowDisabledFocus
+                  onClick={unlock}
                 />
-              </Stack.Item>
-              <Stack.Item>
-                <SpinButton
-                  value={value?.thirdCounter}
-                  min={0}
-                  max={9}
-                  step={1}
-                  incrementButtonAriaLabel="Increase value by 1"
-                  decrementButtonAriaLabel="Decrease value by 1"
-                  onChange={(e, newValue) => {
-                    if (newValue !== undefined) {
-                      setValue({ ...value, thirdCounter: newValue });
-                    }
-                  }}
-                  styles={styles}
-                />
-              </Stack.Item>
+              </Stack>
             </Stack>
-            <Stack
-              horizontal
-              horizontalAlign="center"
-              disableShrink
-              className="display-counter"
-              tokens={lockStackTokens}
-            >
-              <PrimaryButton
-                text="Set"
-                allowDisabledFocus
-                disabled={combination.combinationIsSet}
-                onClick={setCombination}
-              />
-              <DefaultButton
-                text="Unlock"
-                allowDisabledFocus
-                onClick={unlock}
-              />
-            </Stack>
-          </Stack>
-          )}   
+          )}
           <div className="name-signature">
-                  <p>Made with love by Paranshu Makwana</p>
-          </div> 
+            <p>Made with</p>
+            <motion.div
+              className="heart-icn-wrapper"
+              drag
+              dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+              dragElastic={0.3}
+              animate={
+                {
+                  scale: [1, 1.1 , 1]
+                }
+              }
+              transition={{
+                repeat: Infinity,
+                duration: 0.8
+              }}
+            >
+              <motion.div className="dragable-div"></motion.div>
+              <img className="heart-icon" src={heart} alt="heart" />
+            </motion.div>
+            <p>by Paranshu Makwana</p>
+          </div>
         </div>
       </div>
     </ThemeProvider>
