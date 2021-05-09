@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -90,4 +91,24 @@
 .heart-icon {
     width: 100%;
     height: 100%;
+}
+
+/***** Responsive *****/
+
+@media only screen and (max-width: 600px) {
+  .toggle-btn {
+    margin: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #Toggle3-label {
+    display: none;
+  }
+
+  .name-signature {
+    font-size: 0.9em;
+    margin: 0 60px 50px 0;
+    }
 }
