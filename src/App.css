@@ -103,7 +103,7 @@
     align-items: center;
     justify-content: center;
   }
-  #Toggle3-label {
+  .toggle-btn .ms-Label {
     display: none;
   }
 
