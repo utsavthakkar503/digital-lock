@@ -1,14 +1,49 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
 
-  interface IAnimation {
-      play: number;
-      unlocked: boolean;
-      unlk: number
+interface IAnimation {
+  play: number;
+  unlocked: boolean;
+  color: string | undefined
+}
+
+const Lock: React.FC<IAnimation> = ({ play, unlocked, color }) => {
+  const lockControls = useAnimation();
+  const lockHandleControls = useAnimation();
+
+  useEffect(() => {
+    if (unlocked) {
+      lockHandleControls.start("turn");
+    }
+  }, [lockHandleControls, unlocked]);
+
+  useEffect(() => {
+    if (play > 0 && unlocked === false) {
+      lockControls.start("shake");
+    }
+  }, [lockControls, play, unlocked]);
+
+  const lockVariants = {
+    shake: {
+      x: [-30, 30, 0],
+    },
+  };
+
+  const lockHandleVariants = {
+    turn: {
+      y: [-2.5, -15],
+      rotateY: 180,
+      transition: {
+        duration: 0.1,
+        repeat: 0,
+        ease: "circIn",
+      },
+    },
+  };
+
+  if (color === undefined) {
+    color = "#D1D4D4"
   }
-    
-
-const Lock: React.FC<IAnimation> = ({ play, unlocked, unlk }) => {
 
   return (
     <div className="svg-wrapper">
@@ -21,44 +56,33 @@ const Lock: React.FC<IAnimation> = ({ play, unlocked, unlk }) => {
       >
         <g id="padlock">
           <motion.g
-            initial={(play > 0 && unlocked === false)? true : false}
-            animate={{
-              translateX: [null, -20, 20, 0],
-            }}
+            initial={false}
+            animate={lockControls}
+            variants={lockVariants}
             transition={{
               type: "spring",
               repeat: 0,
               repeatType: "mirror",
               duration: 0.1,
-              stiffness: 80,
+              stiffness: 150,
             }}
           >
-            <motion.g 
-            initial={(unlk > 0 )? true: false}
-            animate={{
-                y: [ -2.5, -15],
-                rotateY: 180
-            }}
-            transition={{
-                duration: 0.2,
-                delay: 0.1,
-                repeat: 0,
-                ease: "circIn"
-            }}
-            style={{
+            <motion.g
+              initial={false}
+              animate={lockHandleControls}
+              variants={lockHandleVariants}
+              style={{
                 originY: "68px",
-                originX: "67px"
-            }}
+                originX: "67px",
+              }}
             >
-            <path
-              id="handle"
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M42.0685 0C60.026 0 74.4828 14.57 74.4828 32.6682V68.9655H65.4789V32.6682C65.4789 19.5968 55.0374 9.07434 42.0685 9.07434C29.096 9.07434 18.6554 19.5968 18.6554 32.6682V57.6947H9.65517V32.6682C9.65517 14.57 24.1128 0 42.0685 0V0Z"
-              fill="#D1D5D5"
-              stroke="#000000"
-              strokeWidth="0.5px"
-            />
+              <path
+                id="handle"
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M42.0685 0C60.026 0 74.4828 14.57 74.4828 32.6682V68.9655H65.4789V32.6682C65.4789 19.5968 55.0374 9.07434 42.0685 9.07434C29.096 9.07434 18.6554 19.5968 18.6554 32.6682V57.6947H9.65517V32.6682C9.65517 14.57 24.1128 0 42.0685 0V0Z"
+                fill={color}
+              />
             </motion.g>
             <rect
               id="lockBase"
@@ -66,9 +90,7 @@ const Lock: React.FC<IAnimation> = ({ play, unlocked, unlk }) => {
               width="82.7586"
               height="67.5862"
               rx="10"
-              fill="#D1D5D5"
-              stroke="#000000"
-              strokeWidth="0.5px"
+              fill={color}
             />
           </motion.g>
         </g>

@@ -96,7 +96,6 @@ interface ICombination {
 
 interface IUnlocked {
   unlocked: boolean;
-  unlk: number;
 }
 
 const App: React.FC = () => {
@@ -117,7 +116,6 @@ const App: React.FC = () => {
 
   const [unlockConfig, setUnlockConfig] = useState<IUnlocked>({
     unlocked: false,
-    unlk: 0,
   });
 
   function onChange(ev: React.MouseEvent<HTMLElement>, checked?: boolean) {
@@ -169,10 +167,8 @@ const App: React.FC = () => {
           if (unlockConfig.unlocked) {
             alert("App Already unlocked");
           } else {
-            let newUnlk = unlockConfig.unlk + 1;
             setUnlockConfig({
               unlocked: true,
-              unlk: newUnlk,
             });
           }
         } else {
@@ -191,21 +187,11 @@ const App: React.FC = () => {
       <div className="App">
         <div className="App-body">
           <header className="App-header">
-            {unlockConfig.unlocked ? (
               <Lock
-                key={unlockConfig.unlk}
                 play={playConfig.play}
                 unlocked={unlockConfig.unlocked}
-                unlk={unlockConfig.unlk}
+                color={isDarkTheme? lightTheme.palette?.white : "#232323"}
               />
-            ) : (
-              <Lock
-                key={playConfig.play}
-                play={playConfig.play}
-                unlocked={unlockConfig.unlocked}
-                unlk={unlockConfig.unlk}
-              />
-            )}
             <Toggle
               className="toggle-btn"
               label="Dark mode"
