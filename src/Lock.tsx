@@ -12,9 +12,13 @@ const Lock: React.FC<IAnimation> = ({ play, unlocked, color }) => {
   const lockHandleControls = useAnimation();
 
   useEffect(() => {
-    if (unlocked) {
-      lockHandleControls.start("turn");
+    const animationHandler = async () => {
+      if (unlocked) {
+        await lockHandleControls.start("open");
+        await lockHandleControls.start("turn");
+      }
     }
+      animationHandler()
   }, [lockHandleControls, unlocked]);
 
   useEffect(() => {
@@ -30,11 +34,19 @@ const Lock: React.FC<IAnimation> = ({ play, unlocked, color }) => {
   };
 
   const lockHandleVariants = {
+    open: {
+      y: [0 , -5],
+      transition: {
+        duration: 0.2,
+        repeat: 0,
+        ease: "circIn",
+      },
+    },
     turn: {
-      y: [-2.5, -15],
+      y: [-5, -15],
       rotateY: 180,
       transition: {
-        duration: 0.1,
+        duration: 0.2,
         repeat: 0,
         ease: "circIn",
       },
