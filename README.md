@@ -21,15 +21,3 @@ The beating heart at the bottom right corner is actually interactive and you can
 To install and run app locally:
 - Open comand prompt/powershell/terminal
 - Navigate to the directory you want to downloaod and run application
-- Then run the following commands 
-
-```
-git clone https://github.com/paranshu1234/msa2021-digitalpadlock-react.git
-
-cd msa2021-digitalpadlock-react
-
-npm install
-
-npm start
-
-```
