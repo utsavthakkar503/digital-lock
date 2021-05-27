@@ -351,7 +351,7 @@ const App: React.FC = () => {
               <motion.div className="dragable-div"></motion.div>
               <img className="heart-icon" src={heart} alt="heart" />
             </motion.div>
-            <p>by Paranshu Makwana</p>
+            <p>by Utsav Thakkar</p>
           </div>
         </div>
       </div>
