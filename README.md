@@ -6,14 +6,6 @@ A digital padlock application build on react and typescript. You can set any thr
 
 **Watch Demo** [Video](https://www.youtube.com/watch?v=rvXYuCPxq9Y)
 
-
-![applight](https://user-images.githubusercontent.com/57443740/117589899-2fa57180-b14a-11eb-927c-7002179a04e5.png)
-
-
-
-![app](https://user-images.githubusercontent.com/57443740/117589827-b148cf80-b149-11eb-8aec-3d524b6ab8e4.png)
-
-
 # App Features
 - Abitily to set combination and unlock by entering the correct combination
 - Interactive animations to guide users action
